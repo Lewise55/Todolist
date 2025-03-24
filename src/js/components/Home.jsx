@@ -31,6 +31,7 @@ const Home = () => {
 	
 	return (
 		<div className="text-center m-auto py-5">
+			<h1>ToDo List</h1>
             <input 
 				type="text" 
 				onChange={(e) => setTask(e.target.value)} 
