@@ -1,26 +1,55 @@
-import React from "react";
+// The tasks are added when the user presses enter on the keyboard, or you can have your own button.
+// The delete icon shows only when the task is hovered.
+// The user can add as many tasks as they want.
+// When there are no tasks the list should say "No tasks, add a task"
+// There is no way to update a task, the user will have to delete and create again.
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, {useState} from "react";
+
 
 //create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-            
+	const [toDoList, setToDoList] = useState([]);
+	const [task, setTask] = useState("");
 
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+	const addToList = (e) => {
+        e.preventDefault();
+		let toDo = {value: task, done: false}
+        if (task.trim() !== "") {
+            setToDoList([...toDoList, toDo]);
+            setTask(""); 
+        }
+    };
+	
+	const removeToDo = (i) => {
+		const newToDoList = toDoList.filter((toDo, index) => index !==i);
+		setToDoList(newToDoList);
+	}
+	
+	console.log(toDoList);
+	
+	
+	return (
+		<div className="text-center m-auto py-5">
+            <input 
+				type="text" 
+				onChange={(e) => setTask(e.target.value)} 
+				value={task}
+			/>
+			<button onClick={(e) => addToList(e, task)}>Add to List</button>
+
+			{/* display toDoList */}
+			<ul>
+				{toDoList.length === 0 ? (
+					<li>No tasks, add a task</li>
+				) : (
+					toDoList?.map((toDo, index) => {
+						if(toDo.done != true) {
+							return <li key={index}>{toDo.value} <span onClick={() => removeToDo(index)}>❌</span></li>
+						}							
+					})				
+				)}
+			</ul>	
 		</div>
 	);
 };
