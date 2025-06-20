@@ -33,24 +33,27 @@ const Home = () => {
 		<div className="text-center m-auto py-5">
 			<div className="d-flex justify-content-center align-items-center flex-column">
 			<h1>ToDo List</h1>
-			<div className="d-flex mt-4 ">
-				<input 
-					type="text" 
-					className="btn btn-light border-dark"
-					onChange={(e) => setTask(e.target.value)} 
-					value={task}
-				/>
-				<button 
-					className="btn btn-dark" 
-					onClick={(e) => addToList(e, task)}>
-						Add to List
-				</button>
+			<div className="d-flex mt-4">
+				<div class="input-group mb-3">
+					<input 
+						type="text" 
+						className="btn btn-light border-secondary"
+						onChange={(e) => setTask(e.target.value)} 
+						value={task}
+					/>
+					<button 
+						className="btn btn-dark border-dark" 
+						onClick={(e) => addToList(e, task)}>
+							Add to List
+					</button>
+				</div>
+				
 			</div>
 
 			{/* display toDoList */}
 			
-				<div className="card mt-4" style={{width: "18rem"}}>
-					<div className="card-header">
+				<div className="card border-2 border-dark mt-4" style={{width: "18rem"}}>
+					<div className="card-header bg-dark text-light">
 						My List
 					</div>
 					<div className="card-body text-center">
